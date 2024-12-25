@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger("participant_id");
             $table->unsignedBigInteger("meeting_id");
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign("participant_id")->references("id")->on("participants")->onDelete("cascade");
             $table->foreign("meeting_id")->references("id")->on("meetings")->onDelete("cascade");
