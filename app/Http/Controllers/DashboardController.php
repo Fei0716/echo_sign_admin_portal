@@ -22,11 +22,10 @@ class DashboardController extends Controller
 
         $totalGestures = 23;
 
-        $totalMeetingMinutes = DB::table('participants_meetings')
-            ->whereNotNull('updated_at')  // Or 'deleted_at'
-            ->whereNotNull('created_at')
-            ->selectRaw('SUM(TIMESTAMPDIFF(MINUTE, created_at, updated_at)) AS total_minutes')
-            ->value('total_minutes');
+        $totalMeetingHours = DB::table('participants_meetings')
+            ->selectRaw('ROUND(COUNT(DISTINCT participant_id) / COUNT(DISTINCT meeting_id), 2) AS avg_participants')
+            ->value('avg_participants');
+
 
         $userTraffic = DB::table('participants_meetings')
             ->select(DB::raw('DATE(created_at) as date'), DB::raw('COUNT(DISTINCT participant_id) as total_visitors'))
@@ -34,7 +33,7 @@ class DashboardController extends Controller
             ->orderBy('date', 'asc')
             ->get();
 
-        $totalMeetingHours = $totalMeetingMinutes / 60;
+        // $totalMeetingHours = $totalMeetingMinutes / 60;
         // $totalGestures = $totalGestures ?? 0;
 
         return view('dashboardadmin', compact(

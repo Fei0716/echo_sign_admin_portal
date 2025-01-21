@@ -128,7 +128,7 @@
 					<i class='bx bxs-user' ></i>
 					<span class="text">
 						<h3>{{ $totalVisitors }}</h3>
-						<p>Total Visitors/Participants</p>
+						<p>Total Participants</p>
 					</span>
 				</li>
 				<li>
@@ -156,7 +156,7 @@
 					<i class='bx bxs-time-five' ></i>
 					<span class="text">
 						<h3>{{ $totalMeetingHours }}</h3>
-						<p>Meeting Hours</p>
+						<p>Average Participants per Meeting</p>
 					</span>
 				</li>
 				{{-- <li>
